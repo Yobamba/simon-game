@@ -12,8 +12,8 @@ function nextSequence() {
   let randomNumber = Math.floor(Math.random() * 4);
   let chosenColor = randomChosenColor(randomNumber);
   let buttonSelector = "." + chosenColor;
-  alert(buttonSelector);
-  $(buttonSelector).toggleClass("flash");
+  //   $(buttonSelector).toggleClass("flash");
+  $(buttonSelector).fadeIn(100).fadeOut(100).fadeIn(100);
 
   if (hasStarted == true) {
     // if the game has started, then each time this function is called we
@@ -51,6 +51,13 @@ function wrongSound() {
   audio.play();
 }
 
+function startOver() {
+  gamePattern = [];
+  userClickedPattern = [];
+  hasStarted = false;
+  level = 0;
+}
+
 function animateGameOver() {
   $("body").addClass("game-over");
   wrongSound();
@@ -58,10 +65,8 @@ function animateGameOver() {
   setTimeout(function () {
     $("body").removeClass("game-over");
   }, 200);
-  gamePattern = [];
-  userClickedPattern = [];
-  hasStarted = false;
-  level = 0;
+
+  startOver();
 }
 
 // Code that checks if the user's pattern matches the game sequence
@@ -92,17 +97,14 @@ $(document).keydown(function (event) {
 
     $("h1").text("Level " + level);
     hasStarted = true; // the game has started at this point
-
-    alert("we in this if statement");
     nextSequence();
     let gamePatternLength = gamePattern.length;
-    alert("gamePatternLenth = " + gamePatternLength);
   }
 });
 
 $("div.btn").on("click", function () {
   const userChosenColor = this.id; // stores the id of the button the user clicks on
-  alert("userChosenColor is " + userChosenColor);
+
   userClickedPattern.push(userChosenColor);
   playSound(userChosenColor);
   const thisDiv = "div.btn." + userChosenColor;
