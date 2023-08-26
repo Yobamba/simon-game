@@ -1,4 +1,4 @@
-const gamePattern = [];
+let gamePattern = [];
 let userClickedPattern = [];
 let hasStarted = false;
 let level = 0;
@@ -54,6 +54,7 @@ function wrongSound() {
 function animateGameOver() {
   $("body").addClass("game-over");
   wrongSound();
+  $("h1").text("Game Over, Press Any Key to Restart");
   setTimeout(function () {
     $("body").removeClass("game-over");
   }, 200);
@@ -61,7 +62,6 @@ function animateGameOver() {
   userClickedPattern = [];
   hasStarted = false;
   level = 0;
-  $("h1").text("Game Over, Press Any Key to Restart");
 }
 
 // Code that checks if the user's pattern matches the game sequence
