@@ -46,6 +46,24 @@ function animatePress(currentColor) {
   }, 100);
 }
 
+function wrongSound() {
+  const audio = new Audio("./sounds/" + "wrong" + ".mp3");
+  audio.play();
+}
+
+function animateGameOver() {
+  $("body").addClass("game-over");
+  wrongSound();
+  setTimeout(function () {
+    $("body").removeClass("game-over");
+  }, 200);
+  gamePattern = [];
+  userClickedPattern = [];
+  hasStarted = false;
+  level = 0;
+  $("h1").text("Game Over, Press Any Key to Restart");
+}
+
 // Code that checks if the user's pattern matches the game sequence
 
 //1. Create a new function called checkAnswer(), it should take one input with the name currentLevel
@@ -63,6 +81,7 @@ function checkAnswer(currentLevel) {
     }
   } else {
     console.log("wrong");
+    animateGameOver();
   }
 }
 
